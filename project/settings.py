@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'users',
-    'items'
+    'items',
+    'requests'
 ]
 
 REST_FRAMEWORK = {
