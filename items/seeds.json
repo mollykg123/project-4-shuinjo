@@ -1,0 +1,262 @@
+[
+  {
+    "model": "items.item",
+    "pk": 1,
+    "fields": {
+      "title": "Sourdough Boule",
+      "image": "sourdough.png",
+      "description": "60% rye and 40% white, homemade sourdough boule, open crust.",
+      "may_contain": "[\"nuts\", \"milk\"]",
+      "desired_trades": "[\"kefir\", \"flour\"]",
+      "created_at": "2024-05-23T10:14:35.701Z",
+      "owner": 6
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 2,
+    "fields": {
+      "title": "Kefir",
+      "image": "kefir.png",
+      "description": "Fresh homemade kefir made from organic milk.",
+      "may_contain": "[\"milk\"]",
+      "desired_trades": "[\"sourdough\", \"kimchi\"]",
+      "created_at": "2024-05-24T11:15:30.701Z",
+      "owner": 8
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 3,
+    "fields": {
+      "title": "Kimchi",
+      "image": "kimchi.png",
+      "description": "Spicy homemade kimchi made with fresh ingredients.",
+      "may_contain": "[\"fish sauce\"]",
+      "desired_trades": "[\"kefir\", \"bread\"]",
+      "created_at": "2024-05-24T12:25:40.701Z",
+      "owner": 8
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 4,
+    "fields": {
+      "title": "Compost",
+      "image": "compost.png",
+      "description": "Rich, homemade compost, perfect for gardening.",
+      "may_contain": null,
+      "desired_trades": "[\"vegetables\", \"seeds\"]",
+      "created_at": "2024-05-24T13:35:50.701Z",
+      "owner": 4
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 5,
+    "fields": {
+      "title": "Allotment Vegetables",
+      "image": "vegetables.png",
+      "description": "Fresh vegetables from my allotment, organically grown.",
+      "may_contain": null,
+      "desired_trades": "[\"compost\", \"honey\"]",
+      "created_at": "2024-05-24T14:45:00.701Z",
+      "owner": 5
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 6,
+    "fields": {
+      "title": "Honey",
+      "image": "honey.png",
+      "description": "Raw, unfiltered honey from my backyard beehives.",
+      "may_contain": null,
+      "desired_trades": "[\"vegetables\", \"bread\"]",
+      "created_at": "2024-05-24T15:55:10.701Z",
+      "owner": 1
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 7,
+    "fields": {
+      "title": "Pickled Cucumbers",
+      "image": "pickles.png",
+      "description": "Homemade pickled cucumbers, crunchy and tangy.",
+      "may_contain": null,
+      "desired_trades": "[\"kimchi\", \"sourdough\"]",
+      "created_at": "2024-05-24T16:05:20.701Z",
+      "owner": 2
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 8,
+    "fields": {
+      "title": "Homemade Jam",
+      "image": "jam.png",
+      "description": "Sweet homemade jam made from organic berries.",
+      "may_contain": null,
+      "desired_trades": "[\"bread\", \"honey\"]",
+      "created_at": "2024-05-24T17:15:30.701Z",
+      "owner": 3
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 9,
+    "fields": {
+      "title": "Herbal Tea",
+      "image": "herbal_tea.png",
+      "description": "Dried herbal tea mix from my garden herbs.",
+      "may_contain": null,
+      "desired_trades": "[\"honey\", \"jam\"]",
+      "created_at": "2024-05-24T18:25:40.701Z",
+      "owner": 4
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 10,
+    "fields": {
+      "title": "Homemade Soap",
+      "image": "soap.png",
+      "description": "Natural homemade soap with essential oils.",
+      "may_contain": null,
+      "desired_trades": "[\"herbs\", \"candles\"]",
+      "created_at": "2024-05-24T19:35:50.701Z",
+      "owner": 5
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 11,
+    "fields": {
+      "title": "Sourdough Starter",
+      "image": "sourdough_starter.png",
+      "description": "Active sourdough starter for homemade bread.",
+      "may_contain": "[\"gluten\"]",
+      "desired_trades": "[\"flour\", \"kefir\"]",
+      "created_at": "2024-05-24T20:45:00.701Z",
+      "owner": 1
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 12,
+    "fields": {
+      "title": "Dried Herbs",
+      "image": "dried_herbs.png",
+      "description": "Home-grown dried herbs for cooking.",
+      "may_contain": null,
+      "desired_trades": "[\"soap\", \"jam\"]",
+      "created_at": "2024-05-24T21:55:10.701Z",
+      "owner": 2
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 13,
+    "fields": {
+      "title": "Fermented Hot Sauce",
+      "image": "hot_sauce.png",
+      "description": "Spicy homemade fermented hot sauce.",
+      "may_contain": null,
+      "desired_trades": "[\"kimchi\", \"pickles\"]",
+      "created_at": "2024-05-24T22:05:20.701Z",
+      "owner": 3
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 14,
+    "fields": {
+      "title": "Candle",
+      "image": "candle.png",
+      "description": "Hand-poured soy candle with lavender scent.",
+      "may_contain": null,
+      "desired_trades": "[\"soap\", \"herbal tea\"]",
+      "created_at": "2024-05-24T23:15:30.701Z",
+      "owner": 4
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 15,
+    "fields": {
+      "title": "Fresh Eggs",
+      "image": "eggs.png",
+      "description": "Fresh eggs from free-range chickens.",
+      "may_contain": "[\"eggs\"]",
+      "desired_trades": "[\"vegetables\", \"honey\"]",
+      "created_at": "2024-05-25T00:25:40.701Z",
+      "owner": 5
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 16,
+    "fields": {
+      "title": "Homemade Cheese",
+      "image": "cheese.png",
+      "description": "Delicious homemade cheese from fresh milk.",
+      "may_contain": "[\"milk\"]",
+      "desired_trades": "[\"bread\", \"jam\"]",
+      "created_at": "2024-05-25T01:35:50.701Z",
+      "owner": 9
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 17,
+    "fields": {
+      "title": "Fermented Vegetables",
+      "image": "fermented_vegetables.png",
+      "description": "Mixed fermented vegetables, tangy and healthy.",
+      "may_contain": null,
+      "desired_trades": "[\"kimchi\", \"sourdough\"]",
+      "created_at": "2024-05-25T02:45:00.701Z",
+      "owner": 2
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 18,
+    "fields": {
+      "title": "Homemade Granola",
+      "image": "granola.png",
+      "description": "Crunchy homemade granola with nuts and honey.",
+      "may_contain": "[\"nuts\", \"honey\"]",
+      "desired_trades": "[\"yogurt\", \"jam\"]",
+      "created_at": "2024-05-25T03:55:10.701Z",
+      "owner": 3
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 19,
+    "fields": {
+      "title": "Yogurt",
+      "image": "yogurt.png",
+      "description": "Thick, creamy homemade yogurt.",
+      "may_contain": "[\"milk\"]",
+      "desired_trades": "[\"granola\", \"honey\"]",
+      "created_at": "2024-05-25T04:05:20.701Z",
+      "owner": 4
+    }
+  },
+  {
+    "model": "items.item",
+    "pk": 20,
+    "fields": {
+      "title": "Homegrown Tomatoes",
+      "image": "tomatoes.png",
+      "description": "Sweet, juicy homegrown tomatoes.",
+      "may_contain": null,
+      "desired_trades": "[\"cheese\", \"vegetables\"]",
+      "created_at": "2024-05-25T05:15:30.701Z",
+      "owner": 7
+    }
+  }
+]

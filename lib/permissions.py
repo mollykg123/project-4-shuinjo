@@ -16,12 +16,9 @@ class IsOwner(BasePermission):
     
 
 
-
+#   Custom permission to allow senders to delete and update non-status fields and receivers to update status.
 class IsSenderOrReceiverForDeleteOrReadOnly(BasePermission):
-  """
-  Custom permission to allow senders to delete and update non-status fields,
-  and receivers to update status.
-  """
+
   def has_object_permission(self, request, view, obj):
     # Allow read-only access for safe methods
       if request.method in SAFE_METHODS:

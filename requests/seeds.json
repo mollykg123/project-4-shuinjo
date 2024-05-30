@@ -1,0 +1,122 @@
+[
+{
+  "model": "requests.request",
+  "pk": 1,
+  "fields": {
+    "sender": 1,
+    "receiver": 2,
+    "item_offered": 6,
+    "item_requested": 12,
+    "status": "pending",
+    "timestamp": "2024-05-30T17:30:34.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 2,
+  "fields": {
+    "sender": 2,
+    "receiver": 3,
+    "item_offered": 7,
+    "item_requested": 13,
+    "status": "pending",
+    "timestamp": "2024-05-30T17:35:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 3,
+  "fields": {
+    "sender": 3,
+    "receiver": 4,
+    "item_offered": 8,
+    "item_requested": 14,
+    "status": "pending",
+    "timestamp": "2024-05-30T17:40:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 4,
+  "fields": {
+    "sender": 4,
+    "receiver": 5,
+    "item_offered": 9,
+    "item_requested": 15,
+    "status": "pending",
+    "timestamp": "2024-05-30T17:45:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 5,
+  "fields": {
+    "sender": 5,
+    "receiver": 6,
+    "item_offered": 10,
+    "item_requested": 16,
+    "status": "pending",
+    "timestamp": "2024-05-30T17:50:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 6,
+  "fields": {
+    "sender": 6,
+    "receiver": 7,
+    "item_offered": 11,
+    "item_requested": 17,
+    "status": "pending",
+    "timestamp": "2024-05-30T17:55:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 7,
+  "fields": {
+    "sender": 7,
+    "receiver": 8,
+    "item_offered": 20,
+    "item_requested": 18,
+    "status": "pending",
+    "timestamp": "2024-05-30T18:00:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 8,
+  "fields": {
+    "sender": 8,
+    "receiver": 9,
+    "item_offered": 19,
+    "item_requested": 19,
+    "status": "pending",
+    "timestamp": "2024-05-30T18:05:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 9,
+  "fields": {
+    "sender": 9,
+    "receiver": 10,
+    "item_offered": 5,
+    "item_requested": 20,
+    "status": "pending",
+    "timestamp": "2024-05-30T18:10:00.132Z"
+  }
+},
+{
+  "model": "requests.request",
+  "pk": 10,
+  "fields": {
+    "sender": 10,
+    "receiver": 1,
+    "item_offered": 4,
+    "item_requested": 1,
+    "status": "pending",
+    "timestamp": "2024-05-30T18:15:00.132Z"
+  }
+}
+]
