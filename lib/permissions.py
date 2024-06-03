@@ -39,3 +39,14 @@ class IsSenderOrReceiverForDeleteOrReadOnly(BasePermission):
           return True
         
       return False
+  
+# customer permission to allow user to see detailed view of profile, items created and requests (populated) when logged in - or the trades they have with the user if on other suers profile.
+class IsOwnerOrHasTrades(BasePermission):
+
+  def has_object_permission(self, request, view, obj):
+    if request.user == obj:
+      return True
+    
+    sent_trades = request.user.sent_requests.filter(receiver=obj).exists()
+    received_trades = request.user.received_requests.filter(sender=obj).exists()
+    return sent_trades or received_trades

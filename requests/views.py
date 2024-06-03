@@ -1,6 +1,7 @@
 from rest_framework import generics
 from .models import Request
 from .serializers.common import RequestSerializer
+from .serializers.populated import PopulatedRequestSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from lib.permissions import IsSenderOrReceiverForDeleteOrReadOnly
 from lib.views import ObjectOwnerView
@@ -20,5 +21,5 @@ class RequestIndexView(ObjectOwnerView, generics.ListCreateAPIView):
 # Detail view for retrieving, updating and deleting a specific request
 class RequestDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Request.objects.all()
-  serializer_class = RequestSerializer
+  serializer_class = PopulatedRequestSerializer
   permission_classes = [IsSenderOrReceiverForDeleteOrReadOnly]
