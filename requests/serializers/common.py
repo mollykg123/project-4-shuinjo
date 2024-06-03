@@ -1,7 +1,7 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from ..models import Request
 
-class RequestSerializer(serializers.ModelSerializer):
+class RequestSerializer(ModelSerializer):
     class Meta:
         model = Request
         fields = '__all__'

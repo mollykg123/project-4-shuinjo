@@ -1,11 +1,11 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, CharField, ValidationError
 from ..models import User
 from django.contrib.auth.password_validation import validate_password
 
-class RegisterSerializer(serializers.ModelSerializer):
+class RegisterSerializer(ModelSerializer):
 
-  password = serializers.CharField(write_only=True)
-  password_confirmation = serializers.CharField(write_only=True)
+  password = CharField(write_only=True)
+  password_confirmation = CharField(write_only=True)
 
   class Meta:
     model = User
@@ -16,7 +16,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     password_confirmation = data.pop('password_confirmation')
 
     if password != password_confirmation:
-      raise serializers.ValidationError('Passwords do not match.')
+      raise ValidationError('Passwords do not match.')
     
     # validate_password(password)
 
@@ -25,3 +25,8 @@ class RegisterSerializer(serializers.ModelSerializer):
   def create(self, validated_data):
     return User.objects.create_user(**validated_data)
   
+
+class UserSerializer(ModelSerializer):
+  class Meta: 
+    model = User
+    fields = ('id', 'username', 'location')

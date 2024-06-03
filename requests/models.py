@@ -4,25 +4,25 @@ from django.db import models
 class Request(models.Model):
     sender = models.ForeignKey(
         'users.User',
-        related_name='sent_request',
+        related_name='sent_requests',
         on_delete=models.CASCADE,
         blank=True 
     ) 
     receiver = models.ForeignKey(   
         'users.User', 
-        related_name='received_request',
+        related_name='received_requests',
         on_delete=models.CASCADE,
         blank=True
     )
     item_offered = models.ForeignKey(
         'items.Item',
-        related_name='offered_in_request',
+        related_name='offered_in_requests',
         on_delete=models.CASCADE,
         blank=True
     )
     item_requested = models.ForeignKey(
         'items.Item',
-        related_name='requested_in_request',
+        related_name='requested_in_requests',
         on_delete=models.CASCADE,
         blank=True
     )
