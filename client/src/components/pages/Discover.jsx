@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import TradeItem from '../subcomponents/TradeItem.jsx'
+// import TradeItem from '../subcomponents/TradeItem.jsx'
 
 // Bootstrap imports
 import Container from 'react-bootstrap/Container'
@@ -15,11 +15,13 @@ export default function Discover() {
   const [items, setItems] = useState([])
   const [error, setError] = useState('')
   const [modalShow, setModalShow] = useState(false)
+  // const [selectedItem, setSelectedItem] = useState(null)
 
   useEffect(() => {
     async function fetchItems() {
       try {
         const { data } = await axios.get('/api/items/')
+        console.log(data)
         setItems(data)
       } catch(error) {
         console.log(error.message)
@@ -28,6 +30,13 @@ export default function Discover() {
     }
     fetchItems()
   }, [])
+
+  // const handleModalShow = (item) => {
+  //   setSelectedItem(item)
+  //   setModalShow(true)
+  // }
+
+
 
   return (
     <>
@@ -48,11 +57,6 @@ export default function Discover() {
                         Allergens: {may_contain}<br />
                       </Card.Text>
                       <Button variant="primary" onClick={() => setModalShow(true)}>Trade!</Button>
-                      <TradeItem 
-                        {...items}
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      />
                     </Card.Body>
                   </Card>
                 </Col>
@@ -64,7 +68,12 @@ export default function Discover() {
             :
             <Spinner className='mx-auto' animation="grow" variant="secondary" />
           }
-
+{/* 
+      <TradeItem
+        item={selectedItem}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      /> */}
         </Row>
       </Container>
     </>

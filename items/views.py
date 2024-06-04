@@ -9,17 +9,17 @@ from lib.views import ObjectOwnerView
 # Index View
 class ItemIndexView(ObjectOwnerView, generics.ListCreateAPIView):
   queryset = Item.objects.all()
-  serializer_class = ItemSerializer
+  serializer_class = PopulatedItemSerializer
   permission_classes = [IsAuthenticatedOrReadOnly]
 
 # Detail View
 class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Item.objects.all()
-  serializer_class = ItemSerializer
+  serializer_class = PopulatedItemSerializer
   permission_classes = [IsOwnerOrReadOnly]
 
-  def get_serializer_class(self):
-    if self.request.method == 'GET':
-      return PopulatedItemSerializer
-    else:
-      return ItemSerializer
+  # def get_serializer_class(self):
+  #   if self.request.method == 'GET':
+  #     return PopulatedItemSerializer
+  #   else:
+  #     return ItemSerializer
