@@ -6,5 +6,5 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 # ! /api/profile/
 
 urlpatterns = [
-  path('<int:pk>/', ProfileView.as_view())
+  path('', ProfileView.as_view())
 ]

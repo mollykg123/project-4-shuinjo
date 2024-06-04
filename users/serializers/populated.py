@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from ..models import User
 from items.serializers.common import ItemSerializer
 from requests.serializers.common import RequestSerializer
@@ -6,8 +6,8 @@ from requests.serializers.populated import PopulatedRequestSerializer
 
 class ProfileSerializer(ModelSerializer):
   items_created = ItemSerializer(many=True)
-  sent_requests = RequestSerializer(many=True)
-  received_requests = RequestSerializer(many=True)
+  sent_requests = SerializerMethodField()
+  received_requests = SerializerMethodField()
 
   class Meta:
     model = User

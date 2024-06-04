@@ -4,17 +4,18 @@ from .models import User
 from .serializers.common import RegisterSerializer
 from .serializers.populated import ProfileSerializer
 from lib.permissions import IsOwnerOrHasTrades
+from rest_framework.response import Response
 
 class RegisterView(CreateAPIView):
   queryset = User.objects.all()
   serializer_class = RegisterSerializer
 
 class ProfileView(RetrieveAPIView):
-  queryset = User.objects.all()
-  serializer_class = ProfileSerializer
-  permission_classes = [IsAuthenticated, IsOwnerOrHasTrades]
+  # queryset = User.objects.all()
+  # serializer_class = ProfileSerializer
+  permission_classes = [IsAuthenticated]
 
-  def get_serializer_context(self):
-    context = super().get_serializer_context()
-    context['request'] = self.request
-    return context
+  def get(self, request, *args, **kwargs):
+    user = request.user
+    serializer = ProfileSerializer(user, context={'request': request})
+    return Response(serializer.data)
