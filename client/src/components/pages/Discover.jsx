@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import TradeItem from '../subcomponents/TradeItem.jsx'
 
+
 // Bootstrap imports
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -16,6 +17,7 @@ export default function Discover() {
   const [selectedItem, setSelecteditem] = useState(null)
   const [modalShow, setModalShow] = useState(false)
   const [error, setError] = useState('')
+
 
 
   useEffect(() => {

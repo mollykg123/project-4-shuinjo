@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
 import { getUserProfile } from '../functions/getUserProfile.js'
-import { getAccess } from "../../lib/auth"
-import axios from 'axios'
 
 import {
   Container,

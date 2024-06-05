@@ -11,7 +11,7 @@ export default function FormComponent({ initialData, submit, fields, request, on
   const fieldsReduced = Object.fromEntries(
     Object.entries(fields).map(([key, value]) => [key, value.type === 'multi' ? [] : ''])
   )
-  
+
   // Configurations for cloudinary
   const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET
   const uploadUrl = import.meta.env.VITE_CLOUDINARY_URL
@@ -42,7 +42,7 @@ export default function FormComponent({ initialData, submit, fields, request, on
     form.append('upload_preset', uploadPreset)
     try {
       const { data } = await axios.post(uploadUrl, form)
-      setFormData({ ...formData, image: data.secure_url})
+      setFormData({ ...formData, image: data.secure_url })
     } catch (error) {
       setError(error.message)
     }
@@ -113,38 +113,38 @@ export default function FormComponent({ initialData, submit, fields, request, on
 
   return (
     <form onSubmit={handleSubmit}>
-      <Container className='p-5 d-flex flex-column' 
+      <Container className='p-5 d-flex flex-column'
         style={{ backgroundColor: 'white', borderRadius: '8px', width: '100%', paddingTop: '20px' }}>
 
         {/*iterates over 'fields' to generate form fields dynamically*/}
         {Object.entries(fields).map(([fieldName, fieldData]) => {
 
-          {/*Format field name to capitilize*/}
+          {/*Format field name to capitilize*/ }
           const fieldNameCaps = fieldName
             .replace(/([A-Z[])/g, ' $1')
             .replace(/^./, function (str) { return str.toUpperCase() })
 
-            {/* get current value for formData, convert neutered field to yes/no OR convert to empty for any other field i.e. bitch/dog */}
-            let value = formData[fieldName]
-            if (fieldName === 'neutered') {
-              value = formData[fieldName] ? 'yes' : 'no'
-            } else {
-              value = formData[fieldName] || ''
-            }
+          {/* get current value for formData, convert neutered field to yes/no OR convert to empty for any other field i.e. bitch/dog */ }
+          let value = formData[fieldName]
+          if (fieldName === 'neutered') {
+            value = formData[fieldName] ? 'yes' : 'no'
+          } else {
+            value = formData[fieldName] || ''
+          }
 
           return (
             <FormGroup className='mb-2' key={fieldName}>
               <FormLabel className='small-label'>{fieldNameCaps}</FormLabel>
 
-            {/*!field type conditionality - render based on field type...*/}
-              
+              {/*!field type conditionality - render based on field type...*/}
+
               {/*if type is for upload file. use handleUpload function (cloudinary)*/}
               {fieldData.type === 'file' && (
                 <FormControl
-                type={fieldData.type}
-                name={fieldName}
-                id={fieldName}
-                onChange={handleUpload}
+                  type={fieldData.type}
+                  name={fieldName}
+                  id={fieldName}
+                  onChange={handleUpload}
                 />
               )}
 
@@ -153,11 +153,11 @@ export default function FormComponent({ initialData, submit, fields, request, on
               {/*this is controlled by the formData state and changes are handles by the handleChange function to update state*/}
               {fieldData.type === 'select' && (
                 <FormControl
-                as="select"
-                name={fieldName}
-                id={fieldName}
-                value={value}
-                onChange={(e) => handleChange(fieldName)(e)}
+                  as="select"
+                  name={fieldName}
+                  id={fieldName}
+                  value={value}
+                  onChange={(e) => handleChange(fieldName)(e)}
                 >
                   <option value="">{fieldNameCaps}</option>
                   {fieldData.options.map((option, idx) => (
@@ -174,36 +174,47 @@ export default function FormComponent({ initialData, submit, fields, request, on
               {/*input value is controlled by formData state, and changes are handled by handleMultiChange function to update state accordingly.*/}
               {fieldData.type === 'multi' && (
                 <Creatable
-                onCreateOption={(newValue) => {
-                  setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    [fieldName]: [...prevFormData[fieldName], newValue],
-                  }))
-                }}
-                onChange={handleMultiChange(fieldName)}
-                value={formData[fieldName].map((value) => ({
-                  value,
-                  label: value,
-                }))}
-                isMulti={true}
+                  onCreateOption={(newValue) => {
+                    setFormData((prevFormData) => ({
+                      ...prevFormData,
+                      [fieldName]: [...prevFormData[fieldName], newValue],
+                    }))
+                  }}
+                  onChange={handleMultiChange(fieldName)}
+                  value={formData[fieldName].map((value) => ({
+                    value,
+                    label: value,
+                  }))}
+                  isMulti={true}
                 />)}
 
-                {/*text input default, renders default text input field (e.g.text, number, email).*/}
-                {/*input field's value is controlled by formData state, changes are handled by handleInputChange function*/}
-                {fieldData.type !== 'select' && fieldData.type !== 'multi' && fieldData.type !== 'file' && (
-                  <FormControl
-                    type={fieldData.type}
-                    id={fieldName}
-                    name={fieldName}
-                    value={formData[fieldName] || ''}
-                    onChange={(e) => handleInputChange(fieldName, e)}
-                    placeholder={fieldData.placeholder || fieldName}
-                  />
-                )}
+              {/* // Add a specific check for 'item_requested' field to render a disabled text input */}
+              {fieldData.disabled === true && (
+                <FormControl 
+                  type={fieldData.type}
+                  id={fieldName}
+                  name={fieldName}
+                  value={fieldData.value}
+                  disabled={true}
+                />
+              )}
+
+              {/*text input default, renders default text input field (e.g.text, number, email).*/}
+              {/*input field's value is controlled by formData state, changes are handled by handleInputChange function*/}
+              {fieldData.type !== 'select' && fieldData.type !== 'multi' && fieldData.type !== 'file' && fieldData.disabled !== true && (
+                <FormControl
+                  type={fieldData.type}
+                  id={fieldName}
+                  name={fieldName}
+                  value={formData[fieldName] || ''}
+                  onChange={(e) => handleInputChange(fieldName, e)}
+                  placeholder={fieldData.placeholder || fieldName}
+                />
+              )}
             </FormGroup>
           )
         })}
-      <button className='form-button' type='submit'>{submit}</button>
+        <button className='form-button' type='submit'>{submit}</button>
       </Container>
     </form>
   )

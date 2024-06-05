@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import Root from './Root.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+
 import Home from './components/pages/Home.jsx'
 import Register from './components/pages/Register.jsx'
 import Login from './components/pages/Login.jsx'
@@ -43,6 +44,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+      <RouterProvider router={router} />
+  </React.StrictMode >,
 )

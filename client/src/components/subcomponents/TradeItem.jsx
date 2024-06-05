@@ -3,9 +3,24 @@ import Modal from 'react-bootstrap/Modal'
 import FormComponent from './FormComponent'
 import axios from 'axios'
 import { getAccess } from '../../lib/auth.js'
+import { useEffect, useState } from 'react'
+import { getUserProfile } from '../functions/getUserProfile.js'
 
-export default function TradeItem({ item, onHide, show, getUserProfile }) {
-console.log(item)
+
+export default function TradeItem({ item, onHide, show }) {
+// console.log(item)
+const [userItemsCreated, setUserItemsCreated] = useState([])
+
+
+useEffect(() => {
+  getUserProfile()
+    .then(data => {
+      setUserItemsCreated(data.items_created)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}, [])
 
   if (!item) {
     return null
@@ -13,16 +28,21 @@ console.log(item)
 
   const { location, username } = item.owner
   console.log(location, username)
+  console.log('item selected:', item.title)
 
   const fields = {
-    item_offered: {
+    item_requested: {
       type: 'text',
-      placeholder: 'select which item to trade',
+      value: item.title,
+      disabled: true
+    },
+    item_offered: {
+      type: 'select',
+      options: userItemsCreated.map(userItem => userItem.title)
     }
   }
 
-  // async function getUser
-
+  
   async function handleTradeRequest(){
     try {
       await axios.post('/api/requests/', {
@@ -30,7 +50,7 @@ console.log(item)
           Authorization: `Bearer ${getAccess()}`
         }
       })
-      } catch (error) {
+    } catch (error) {
       console.log(error)
     }
   }
