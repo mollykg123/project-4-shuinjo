@@ -18,5 +18,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'camelcase': 'off',
+    'react/prop-types': 'error'
   },
 }

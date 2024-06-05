@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 
 
-export default function FormComponent({ submit, fields, request, onLoad }) {
+export default function FormComponent({ initialData, submit, fields, request, onLoad }) {
 
   // Creates initial state Object from 'fields', sets default variables based on field type. 
   const fieldsReduced = Object.fromEntries(
@@ -86,6 +86,13 @@ export default function FormComponent({ submit, fields, request, onLoad }) {
 
 
   // ! Effects
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData)
+    }
+  }, [initialData])
+
   // Loads initial data when component mounts; 'onLoad' updates for data with fetched data.
   useEffect(() => {
     async function fillFields() {

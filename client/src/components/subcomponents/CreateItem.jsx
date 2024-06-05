@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getAccess } from '../../lib/auth.js'
 import FormComponent from './FormComponent.jsx'
 
-export default function CreateItem() {
+export default function CreateItem({ getUserProfile, onCreated }) {
 
   const fields = {
     title: {
@@ -34,6 +34,8 @@ export default function CreateItem() {
           Authorization: `Bearer ${getAccess()}`
         }
       })
+      getUserProfile()
+      onCreated()
     } catch (error) {
       console.log(error)
     }

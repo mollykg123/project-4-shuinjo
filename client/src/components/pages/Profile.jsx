@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getAccess } from "../../lib/auth"
 import axios from 'axios'
+
 import {
   Container,
   Row,
@@ -12,43 +13,87 @@ import {
   Button,
   Modal
 } from 'react-bootstrap'
+
 import CreateItem from '../subcomponents/CreateItem.jsx'
+import UpdateItem from '../subcomponents/UpdateItem.jsx'
+import DeleteItem from '../subcomponents/DeleteItem.jsx'
+
 
 export default function Profile() {
   const [userProfile, setUserProfile] = useState(null)
   const [profileError, setProfileError] = useState('')
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
+  const [showCreateModal, setShowCreateModal] = useState(false)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false)
+
+  const getUserProfile = async () => {
+    try {
+      const { data } = await axios.get('/api/profile/', {
+        headers: {
+          Authorization: `Bearer ${getAccess()}`
+        }
+      })
+      setUserProfile(data)
+      // setLoading(false)
+    } catch (error) {
+      setProfileError(error.message)
+      // setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    async function getUserProfile() {
-      try {
-        const { data } = await axios.get('/api/profile/', {
-          headers: {
-            Authorization: `Bearer ${getAccess()}`
-          }
-        })
-        console.log(data)
-        setUserProfile(data)
-        setLoading(false)
-      } catch (error) {
-        setProfileError(error.message)
-        setLoading(false)
-      }
-    }
     getUserProfile()
   }, [])
 
-  const handleShowModal = () => setShowModal(true)
-  const handleCloseModal = () => setShowModal(false)
 
-  if (loading) {
-    return (
-      <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-        <Spinner animation="border" variant="primary" />
-      </Container>
-    );
+  // Create Modal Handlers
+  const handleShowCreateModal = () => {
+    setShowCreateModal(true)
   }
+  const handleCloseModal = () => setShowCreateModal(false)
+
+
+  // Update Modal Handlers
+  const handleShowUpdateModal = (item) => {
+    setSelectedItem(item)
+    setShowUpdateModal(true)
+  }
+  const handleCloseUpdateModal = () => {
+    setSelectedItem(null)
+    setShowUpdateModal(false)
+  }
+  const handleItemUpdated = async () => {
+    handleCloseUpdateModal()
+    // setLoading(true)
+    getUserProfile()
+  }
+
+  // Delete Modal Handlers
+
+  const handleShowDeleteModal = (item) => {
+    setSelectedItem(item)
+    setShowDeleteModal(true)
+  }
+  // const handleShowConfirmDelete = (item) => {
+  //   setSelectedItem(item)
+  //   setShowConfirmDelete(true)
+  // }
+
+  // const handleCancelDelete = () => {
+  //   setShowConfirmDelete(false)
+  // }
+
+  // if (loading) {
+  //   return (
+  //     <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+  //       <Spinner animation="border" variant="primary" />
+  //     </Container>
+  //   )
+  // }
 
   if (profileError) {
     return <Alert variant="danger">{profileError}</Alert>
@@ -83,13 +128,25 @@ export default function Profile() {
                     <Card.Body>
                       <Card.Title>{item.title}</Card.Title>
                       <Card.Text>{item.description}</Card.Text>
+                      <Button
+                        variant="secondary"
+                        onClick={() => handleShowUpdateModal(item)}
+                      >
+                        Update Item
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => handleShowDeleteModal(item)}
+                      >
+                        Delete Item
+                      </Button>
                     </Card.Body>
                   </Card>
                 ))
               ) : (
                 <Card.Text>No items found.</Card.Text>
               )}
-              <Button onClick={handleShowModal} variant="link">
+              <Button className="mt-3" onClick={handleShowCreateModal} variant="primary">
                 Create Item
               </Button>
             </Card.Body>
@@ -129,14 +186,54 @@ export default function Profile() {
       </Row>
 
       {/* Modal for Creating Item */}
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showCreateModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Create Item</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CreateItem />
+          <CreateItem
+            getUserProfile={getUserProfile}
+            onCreated={handleCloseModal}
+          />
         </Modal.Body>
       </Modal>
+
+      {/* Modal for Updating Item */}
+      <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedItem && (
+            <UpdateItem
+              item={selectedItem}
+              onUpdated={handleItemUpdated}
+              onCancel={handleCloseUpdateModal}
+            />
+          )}
+        </Modal.Body>
+      </Modal>
+
+      {/* Modal for Deleting Item */}
+      <Modal show={showDeleteModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedItem && (
+            <DeleteItem
+              item={selectedItem}
+              onDelete={() => {
+                handleCloseModal()
+                // setLoading(true)
+                getUserProfile()
+              }}
+              onCancel={handleCloseModal}
+              />
+          )}
+        </Modal.Body>
+      </Modal>
+
     </Container>
   )
 }
