@@ -47,7 +47,6 @@ console.log(item)
         </Modal.Header>
         <Modal.Body>
           <p>{item.description}</p>
-          {/* <p>{item.owner.location}</p>  */}
           <p>Select Item to Trade with {item.owner}</p>
           < FormComponent 
             request={handleTradeRequest}
