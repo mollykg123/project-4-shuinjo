@@ -9,7 +9,7 @@ from lib.views import ObjectOwnerView
 # Index View
 class ItemIndexView(ObjectOwnerView, generics.ListCreateAPIView):
   queryset = Item.objects.all()
-  serializer_class = ItemSerializer
+  serializer_class = PopulatedItemSerializer
   permission_classes = [IsAuthenticatedOrReadOnly]
 
 # Detail View

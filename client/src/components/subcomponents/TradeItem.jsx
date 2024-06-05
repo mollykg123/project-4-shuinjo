@@ -5,7 +5,7 @@ import axios from 'axios'
 import { getAccess } from '../../lib/auth.js'
 
 export default function TradeItem({ item, onHide, show }) {
-  console.log(item)
+console.log(item)
 
   if (!item) {
     return null

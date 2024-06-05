@@ -36,6 +36,8 @@ export default function Discover() {
     setModalShow(true)
   }
 
+  console.log(selectedItem)
+
   return (
     <>
       <h1 className='text-center my-4'>Items</h1>
