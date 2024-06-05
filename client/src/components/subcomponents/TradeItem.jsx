@@ -11,6 +11,9 @@ console.log(item)
     return null
   }
 
+  const { location, username } = item.owner
+  console.log(location, username)
+
   const fields = {
     item_offered: {
       type: 'text',
@@ -46,8 +49,8 @@ console.log(item)
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <p>From {username} in {location}</p>
           <p>{item.description}</p>
-          <p>Select Item to Trade with {item.owner}</p>
           < FormComponent 
             request={handleTradeRequest}
             fields={fields}
