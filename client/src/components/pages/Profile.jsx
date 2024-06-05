@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getUserProfile } from '../functions/getUserProfile.js'
 import { getAccess } from "../../lib/auth"
 import axios from 'axios'
 
@@ -30,24 +31,15 @@ export default function Profile() {
   const [selectedItem, setSelectedItem] = useState(null)
   const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
-  const getUserProfile = async () => {
-    try {
-      const { data } = await axios.get('/api/profile/', {
-        headers: {
-          Authorization: `Bearer ${getAccess()}`
-        }
-      })
-      console.log(data)
-      setUserProfile(data)
-      // setLoading(false)
-    } catch (error) {
-      setProfileError(error.message)
-      // setLoading(false)
-    }
-  }
 
   useEffect(() => {
     getUserProfile()
+      .then(data => {
+        setUserProfile(data)
+      })
+      .catch(error => {
+        setProfileError(error.message)
+      })
   }, [])
 
 

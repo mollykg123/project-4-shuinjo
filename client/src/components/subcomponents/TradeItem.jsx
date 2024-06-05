@@ -4,7 +4,7 @@ import FormComponent from './FormComponent'
 import axios from 'axios'
 import { getAccess } from '../../lib/auth.js'
 
-export default function TradeItem({ item, onHide, show }) {
+export default function TradeItem({ item, onHide, show, getUserProfile }) {
 console.log(item)
 
   if (!item) {
