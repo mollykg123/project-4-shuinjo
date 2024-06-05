@@ -1,14 +1,44 @@
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import FormComponent from './FormComponent'
+import axios from 'axios'
+import { getAccess } from '../../lib/auth.js'
 
-export default function TradeItem({...item}) {
-  // console.log(item)
+export default function TradeItem({ item, onHide, show }) {
+  console.log(item)
+
+  if (!item) {
+    return null
+  }
+
+  const fields = {
+    item_offered: {
+      type: 'text',
+      placeholder: 'select which item to trade',
+    }
+  }
+
+  // async function getUser
+
+  async function handleTradeRequest(){
+    try {
+      await axios.post('/api/requests/', {
+        headers: {
+          Authorization: `Bearer ${getAccess()}`
+        }
+      })
+      } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
       <Modal
-        {...item}
+        show={show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        onHide={onHide}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -16,15 +46,17 @@ export default function TradeItem({...item}) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </p>
+          <p>{item.description}</p>
+          {/* <p>{item.owner.location}</p>  */}
+          <p>Select Item to Trade with {item.owner}</p>
+          < FormComponent 
+            request={handleTradeRequest}
+            fields={fields}
+            submit='Send Request'
+          />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={item.onHide}>Close</Button>
+          <Button onClick={onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
   )

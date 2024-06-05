@@ -37,6 +37,7 @@ export default function Profile() {
           Authorization: `Bearer ${getAccess()}`
         }
       })
+      console.log(data)
       setUserProfile(data)
       // setLoading(false)
     } catch (error) {
