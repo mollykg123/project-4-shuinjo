@@ -69,7 +69,7 @@ useEffect(() => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>From {username} in {location}</p>
+          <p>From <strong>{username}</strong> in <strong>{location}</strong></p>
           <p>{item.description}</p>
           < FormComponent 
             request={handleTradeRequest}
@@ -78,7 +78,7 @@ useEffect(() => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onHide}>Close</Button>
+          <Button className='modal-button' onClick={onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
   )

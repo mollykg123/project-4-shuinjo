@@ -113,9 +113,7 @@ export default function FormComponent({ initialData, submit, fields, request, on
 
   return (
     <form onSubmit={handleSubmit}>
-      <Container className='p-5 d-flex flex-column'
-        style={{ backgroundColor: 'white', borderRadius: '8px', width: '100%', paddingTop: '20px' }}>
-
+      <Container className='p-5 d-flex flex-column form-component-style'>
         {/*iterates over 'fields' to generate form fields dynamically*/}
         {Object.entries(fields).map(([fieldName, fieldData]) => {
 

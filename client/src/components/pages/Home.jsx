@@ -1,5 +1,8 @@
 export default function Home() {
   return (
-    <h1>SHUINJō</h1>
+    <div className='hero-image'>
+      <h1 className='hero-title'>SHUINJō</h1>
+      <p className='hero-tagline'>A trading platform for home-grown goods</p>
+    </div>
   )
 }

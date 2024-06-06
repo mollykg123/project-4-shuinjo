@@ -95,136 +95,139 @@ export default function Profile() {
   }
 
   return (
-    <Container className="mt-5">
-      <h1>{userProfile.username}&apos;s profile</h1>
-      <Row className="mt-4">
-        <Col md={4}>
-          <Card>
-            <Card.Body>
-              <Card.Title>User Profile</Card.Title>
-              <Card.Text>
-                <strong>Username:</strong> {userProfile.username} <br />
-                <strong>Location:</strong> {userProfile.location}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card>
-            <Card.Body>
-              <Card.Title>Items</Card.Title>
-              {userProfile.items_created.length > 0 ? (
-                userProfile.items_created.map(item => (
-                  <Card key={item.id} className="mb-2">
-                    <Card.Body>
-                      <Card.Title>{item.title}</Card.Title>
-                      <Card.Text>{item.description}</Card.Text>
-                      <Button
-                        variant="secondary"
-                        onClick={() => handleShowUpdateModal(item)}
-                      >
-                        Update Item
-                      </Button>
-                      <Button
-                        variant="secondary"
-                        onClick={() => handleShowDeleteModal(item)}
-                      >
-                        Delete Item
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                ))
-              ) : (
-                <Card.Text>No items found.</Card.Text>
-              )}
-              <Button className="mt-3" onClick={handleShowCreateModal} variant="primary">
-                Create Item
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card>
-            <Card.Body>
-              <Card.Title>Requests</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Sent Requests</Card.Subtitle>
-              {userProfile.sent_requests.length > 0 ? (
-                <ListGroup variant="flush">
-                  {userProfile.sent_requests.map(req => (
-                    <ListGroup.Item key={req.id}>
-                      {req.item_offered.title} for {req.item_requested.title} - Status: {req.status}
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              ) : (
-                <Card.Text>No sent requests.</Card.Text>
-              )}
-              <Card.Subtitle className="mt-3 mb-2 text-muted">Received Requests</Card.Subtitle>
-              {userProfile.received_requests.length > 0 ? (
-                <ListGroup variant="flush">
-                  {userProfile.received_requests.map(req => (
-                    <ListGroup.Item key={req.id}>
-                      {req.item_offered.title} for {req.item_requested.title} - Status: {req.status}
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              ) : (
-                <Card.Text>No received requests.</Card.Text>
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+    <Container className="mt-1 profile-background">
+      <div className='profile-background-image'>
+        <h1 className='profile-background fira-code-bold'>{userProfile.username}&apos;s profile</h1>
+        <Row className="mt-4">
+          <Col md={3}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Details</Card.Title>
+                <Card.Text>
+                  <p className='card-details '><strong>{userProfile.username}</strong></p>
+                  <p className='card-details'>{userProfile.location}</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={6}>
+            <Card>
+              <Card.Body>
+                {userProfile.items_created.length > 0 ? (
+                  userProfile.items_created.map(item => (
+                    <Card key={item.id} className="mb-2">
+                      <Card.Body>
+                        <Card.Title>{item.title}</Card.Title>
+                        <Card.Text>{item.description}</Card.Text>
+                        <Button
+                          className='modal-button'
+                          onClick={() => handleShowUpdateModal(item)}
+                        >
+                          Update Item
+                        </Button>
+                        <div
+                          className='delete-button'
+                          onClick={() => handleShowDeleteModal(item)}
+                        >
+                          Delete
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  ))
+                ) : (
+                  <Card.Text>No items found.</Card.Text>
+                )}
+                <Button 
+                  className="mt-3 modal-button" 
+                  onClick={handleShowCreateModal} 
+                >
+                  Create Item
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Requests</Card.Title>
+                <Card.Subtitle className="mb-2 fira-code-bold">Sent Requests</Card.Subtitle>
+                {userProfile.sent_requests.length > 0 ? (
+                  <ListGroup variant="flush">
+                    {userProfile.sent_requests.map(req => (
+                      <ListGroup.Item key={req.id}>
+                        {req.item_offered.title} for {req.item_requested.title} - Status: {req.status}
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                ) : (
+                  <Card.Text>No sent requests.</Card.Text>
+                )}
+                <Card.Subtitle className="mt-3 mb-2 fira-code-bold">Received Requests</Card.Subtitle>
+                {userProfile.received_requests.length > 0 ? (
+                  <ListGroup variant="flush">
+                    {userProfile.received_requests.map(req => (
+                      <ListGroup.Item key={req.id}>
+                        {req.item_offered.title} for {req.item_requested.title} - Status: {req.status}
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                ) : (
+                  <Card.Text>No received requests.</Card.Text>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
 
-      {/* Modal for Creating Item */}
-      <Modal show={showCreateModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create Item</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <CreateItem
-            getUserProfile={getUserProfile}
-            onCreated={handleCloseModal}
-          />
-        </Modal.Body>
-      </Modal>
-
-      {/* Modal for Updating Item */}
-      <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Update Item</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedItem && (
-            <UpdateItem
-              item={selectedItem}
-              onUpdated={handleItemUpdated}
-              onCancel={handleCloseUpdateModal}
+        {/* Modal for Creating Item */}
+        <Modal show={showCreateModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Create Item</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <CreateItem
+              getUserProfile={getUserProfile}
+              onCreated={handleCloseModal}
             />
-          )}
-        </Modal.Body>
-      </Modal>
+          </Modal.Body>
+        </Modal>
 
-      {/* Modal for Deleting Item */}
-      <Modal show={showDeleteModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete Item</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedItem && (
-            <DeleteItem
-              item={selectedItem}
-              onDelete={() => {
-                handleCloseModal()
-                // setLoading(true)
-                getUserProfile()
-              }}
-              onCancel={handleCloseModal}
+        {/* Modal for Updating Item */}
+        <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Item</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedItem && (
+              <UpdateItem
+                item={selectedItem}
+                onUpdated={handleItemUpdated}
+                onCancel={handleCloseUpdateModal}
               />
-          )}
-        </Modal.Body>
-      </Modal>
+            )}
+          </Modal.Body>
+        </Modal>
 
+        {/* Modal for Deleting Item */}
+        <Modal show={showDeleteModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Delete Item</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedItem && (
+              <DeleteItem
+                item={selectedItem}
+                onDelete={() => {
+                  handleCloseModal()
+                  // setLoading(true)
+                  getUserProfile()
+                }}
+                onCancel={handleCloseModal}
+              />
+            )}
+          </Modal.Body>
+        </Modal>
+      </div>
     </Container>
   )
 }

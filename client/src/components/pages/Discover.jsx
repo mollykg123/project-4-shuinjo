@@ -41,42 +41,39 @@ export default function Discover() {
   console.log(selectedItem)
 
   return (
-    <>
-      <h1 className='text-center my-4'>Items</h1>
-      <Container fluid className='text-center'>
-        <Row>
-          {items.length > 0 &&
-            items.map(item => {
-              const { id, title, description, image, may_contain } = item
-              return (
-                <Col className='mb-4' key={id} xs={12} sm={6} md={4} lg={3}>
-                  <Card className='h-100'>
-                    <Card.Img variant="top" src={image} />
-                    <Card.Body className='d-flex flex-column'>
-                      <Card.Title>{title}</Card.Title>
-                      <Card.Text>
-                        Description: {description}<br />
-                        Allergens: {may_contain}<br />
-                      </Card.Text>
-                      <Button variant="primary" onClick={() => {
-                        handleTradeModal(item)
-                      }}>
-                        Trade!
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              )
-            })
-          }
-        </Row>
-        <TradeItem
-          item={selectedItem}
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      </Container>
-    </>
-
+    <Container fluid className='text-center discover-background'>
+      <h1 className='text-center mb-4'>Find an Item to trade!</h1>
+      <Row>
+        {items.length > 0 &&
+          items.map(item => {
+            const { id, title, description, image, may_contain } = item
+            return (
+              <Col className='mb-4' key={id} xs={12} sm={6} md={4} lg={3}>
+                <Card className='h-100'>
+                  <Card.Img variant="top" src={image} />
+                  <Card.Body className='d-flex flex-column'>
+                    <Card.Title>{title}</Card.Title>
+                    <Card.Text>
+                      {description}<br />
+                      {may_contain && `Allergens: ${may_contain}`}
+                    </Card.Text>
+                    <Button className='modal-button' onClick={() => {
+                      handleTradeModal(item)
+                    }}>
+                      Trade!
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            )
+          })
+        }
+      </Row>
+      <TradeItem
+        item={selectedItem}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </Container>
   )
 }

@@ -10,6 +10,8 @@ import Login from './components/pages/Login.jsx'
 import Profile from './components/pages/Profile.jsx'
 import Discover from './components/pages/Discover.jsx'
 
+import './styles/main.scss'
+
 
 // Router
 const router = createBrowserRouter([
