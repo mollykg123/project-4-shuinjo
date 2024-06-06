@@ -21,7 +21,7 @@ import DeleteItem from '../subcomponents/DeleteItem.jsx'
 export default function Profile() {
   const [userProfile, setUserProfile] = useState(null)
   const [profileError, setProfileError] = useState('')
-  // const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
@@ -30,14 +30,29 @@ export default function Profile() {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
 
+  // useEffect(() => {
+  //   getUserProfile()
+  //     .then(data => {
+  //       setUserProfile(data)
+  //     })
+  //     .catch(error => {
+  //       setProfileError(error.message)
+  //     })
+  // }, [])
+
+  const fetchUserProfile = async () => {
+    try {
+      const data = await getUserProfile()
+      setUserProfile(data)
+    } catch (error) {
+      setProfileError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
-    getUserProfile()
-      .then(data => {
-        setUserProfile(data)
-      })
-      .catch(error => {
-        setProfileError(error.message)
-      })
+    fetchUserProfile()
   }, [])
 
 
@@ -45,23 +60,26 @@ export default function Profile() {
   const handleShowCreateModal = () => {
     setShowCreateModal(true)
   }
-  const handleCloseModal = () => setShowCreateModal(false)
-
+  const handleCloseCreateModal = async () => {
+    setShowCreateModal(false)
+    await fetchUserProfile()
+  }
 
   // Update Modal Handlers
   const handleShowUpdateModal = (item) => {
     setSelectedItem(item)
     setShowUpdateModal(true)
   }
-  const handleCloseUpdateModal = () => {
+  const handleCloseUpdateModal = async () => {
     setSelectedItem(null)
     setShowUpdateModal(false)
+    await fetchUserProfile()
   }
-  const handleItemUpdated = async () => {
-    handleCloseUpdateModal()
-    // setLoading(true)
-    getUserProfile()
-  }
+  // const handleItemUpdated = async () => {
+  //   handleCloseUpdateModal()
+  //   // setLoading(true)
+  //   getUserProfile()
+  // }
 
   // Delete Modal Handlers
 
@@ -70,10 +88,12 @@ export default function Profile() {
     setShowDeleteModal(true)
   }
 
-  const handleCloseDeleteModal = () => {
+  const handleCloseDeleteModal = async () => {
     setShowDeleteModal(false)
-    getUserProfile()
+    await fetchUserProfile()
   }
+
+
   // const handleShowConfirmDelete = (item) => {
   //   setSelectedItem(item)
   //   setShowConfirmDelete(true)
@@ -83,13 +103,13 @@ export default function Profile() {
   //   setShowConfirmDelete(false)
   // }
 
-  // if (loading) {
-  //   return (
-  //     <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-  //       <Spinner animation="border" variant="primary" />
-  //     </Container>
-  //   )
-  // }
+  if (loading) {
+    return (
+      <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    )
+  }
 
   if (profileError) {
     return <Alert variant="danger">{profileError}</Alert>
@@ -102,7 +122,7 @@ export default function Profile() {
   return (
     <Container className="mt-1 profile-background">
       <div className='profile-background-image'>
-        <h1 className='profile-background fira-code-bold'>{userProfile.username}&apos;s profile</h1>
+        <h1 className='profile-background fira-code-bold'>Welcome Back, {userProfile.username}.</h1>
         <Row className="mt-4">
           <Col md={3}>
             <Card>
@@ -185,14 +205,14 @@ export default function Profile() {
         </Row>
 
         {/* Modal for Creating Item */}
-        <Modal show={showCreateModal} onHide={handleCloseModal}>
+        <Modal show={showCreateModal} onHide={handleCloseCreateModal}>
           <Modal.Header closeButton>
             <Modal.Title>Create Item</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <CreateItem
               getUserProfile={getUserProfile}
-              onCreated={handleCloseModal}
+              onCreated={handleCloseCreateModal}
             />
           </Modal.Body>
         </Modal>
@@ -206,7 +226,7 @@ export default function Profile() {
             {selectedItem && (
               <UpdateItem
                 item={selectedItem}
-                onUpdated={handleItemUpdated}
+                onUpdated={handleCloseUpdateModal}
                 onCancel={handleCloseUpdateModal}
               />
             )}
@@ -222,9 +242,7 @@ export default function Profile() {
             {selectedItem && (
               <DeleteItem
                 item={selectedItem}
-                onDelete={() => {
-                  handleCloseDeleteModal
-                }}
+                onDelete={handleCloseDeleteModal}
                 onCancel={() => setShowDeleteModal(false)}
               />
             )}

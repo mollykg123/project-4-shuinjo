@@ -12,6 +12,7 @@ class ItemIndexView(ObjectOwnerView, generics.ListCreateAPIView):
   serializer_class = PopulatedItemSerializer
   permission_classes = [IsAuthenticatedOrReadOnly]
 
+
 # Detail View
 class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Item.objects.all()

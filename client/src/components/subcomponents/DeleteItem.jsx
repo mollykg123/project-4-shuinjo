@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { Button, Modal, Alert } from 'react-bootstrap';
+import axios from 'axios'
+import { Button, Modal, Alert } from 'react-bootstrap'
 import { getAccess } from '../../lib/auth'
 
 export default function DeleteItem({ item, onDelete, onCancel }) {

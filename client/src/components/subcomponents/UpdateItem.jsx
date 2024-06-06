@@ -3,6 +3,7 @@ import axios from 'axios'
 import { getAccess } from '../../lib/auth'
 import FormComponent from './FormComponent.jsx'
 
+
 export default function UpdateItem({ item, onUpdated }) {
   const fields = {
     title: {
