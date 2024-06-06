@@ -12,8 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import django_on_heroku
 import os
-
+import environ
 from pathlib import Path
+
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=emd6_!v2pdtp&c#x7$25eyr@c+8w53%o6gg4=!is0hnt)yk3v'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -95,12 +100,17 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django-shuinjo',
-        'HOST': 'localhost',
-        'PORT': 5432
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': env('PGDATABASE'),
+    'USER': env('PGUSER'),
+    'PASSWORD': env('PGPASSWORD'),
+    'HOST': env('PGHOST'),
+    'PORT': env('PGPORT'),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+  }
 }
 
 AUTH_USER_MODEL = 'users.User'
