@@ -9,7 +9,7 @@ export default function FormComponent({ initialData, submit, fields, request, on
 
   // Creates initial state Object from 'fields', sets default variables based on field type. 
   const fieldsReduced = Object.fromEntries(
-    Object.entries(fields).map(([key, value]) => [key, value.type === 'multi' ? [] : ''])
+    Object.entries(fields).map(([key, value]) => [key, value.value ? value.value : value.type === 'multi' ? [] : ''])
   )
 
   // Configurations for cloudinary
@@ -155,12 +155,13 @@ export default function FormComponent({ initialData, submit, fields, request, on
                   name={fieldName}
                   id={fieldName}
                   value={value}
+                  disabled={fieldData.disabled}
                   onChange={(e) => handleChange(fieldName)(e)}
                 >
-                  <option value="">{fieldNameCaps}</option>
+                  {!fieldData.disabled && <option value="">{fieldNameCaps}</option>}
                   {fieldData.options.map((option, idx) => (
-                    <option key={idx} value={option}>
-                      {option}
+                    <option key={idx} value={option.value}>
+                      {option.label}
                     </option>
                   ))}
                 </FormControl>
@@ -187,7 +188,7 @@ export default function FormComponent({ initialData, submit, fields, request, on
                 />)}
 
               {/* // Add a specific check for 'item_requested' field to render a disabled text input */}
-              {fieldData.disabled === true && (
+              {/* {fieldData.disabled === true && (
                 <FormControl 
                   type={fieldData.type}
                   id={fieldName}
@@ -195,7 +196,7 @@ export default function FormComponent({ initialData, submit, fields, request, on
                   value={fieldData.value}
                   disabled={true}
                 />
-              )}
+              )} */}
 
               {/*text input default, renders default text input field (e.g.text, number, email).*/}
               {/*input field's value is controlled by formData state, changes are handled by handleInputChange function*/}

@@ -11,7 +11,7 @@ export default function UpdateItem({ item, onUpdated }) {
       placeholder: 'Name of item here'
     },
     image: {
-      type: 'text',
+      type: 'file',
       placeholder: 'Upload an image'
     },
     description: {

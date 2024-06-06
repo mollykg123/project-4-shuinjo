@@ -12,6 +12,12 @@ class ItemIndexView(ObjectOwnerView, generics.ListCreateAPIView):
   serializer_class = PopulatedItemSerializer
   permission_classes = [IsAuthenticatedOrReadOnly]
 
+  def get_serializer_class(self):
+    if self.request.method == 'GET':
+      return PopulatedItemSerializer
+    else:
+      return ItemSerializer
+
 
 # Detail View
 class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):

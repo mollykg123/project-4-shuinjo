@@ -16,6 +16,7 @@ import {
 import CreateItem from '../subcomponents/CreateItem.jsx'
 import UpdateItem from '../subcomponents/UpdateItem.jsx'
 import DeleteItem from '../subcomponents/DeleteItem.jsx'
+// import UpdateStatusRequest from '../subcomponents/UpdateStatusRequest.jsx'
 
 
 export default function Profile() {
@@ -25,9 +26,9 @@ export default function Profile() {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const [showModal, setShowModal] = useState(false)
+  // const [showModal, setShowModal] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false)
+  // const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
 
   // useEffect(() => {
@@ -57,9 +58,7 @@ export default function Profile() {
 
 
   // Create Modal Handlers
-  const handleShowCreateModal = () => {
-    setShowCreateModal(true)
-  }
+  const handleShowCreateModal = () => setShowCreateModal(true)
   const handleCloseCreateModal = async () => {
     setShowCreateModal(false)
     await fetchUserProfile()
@@ -144,6 +143,12 @@ export default function Profile() {
                       <Card.Body>
                         <Card.Title>{item.title}</Card.Title>
                         <Card.Text>{item.description}</Card.Text>
+                        <Card.Img 
+                          variant="top" 
+                          src={item.image} 
+                          alt= {item.title} 
+                          style={{ maxWidth: '100%', height: 'auto' }}
+                        />
                         <Button
                           className='modal-button'
                           onClick={() => handleShowUpdateModal(item)}

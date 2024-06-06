@@ -38,6 +38,11 @@ export default function Discover() {
     setModalShow(true)
   }
 
+  const handleCloseModal = () => {
+    setModalShow(true)
+    setSelecteditem(null)
+  }
+
   console.log(selectedItem)
 
   return (
@@ -46,16 +51,22 @@ export default function Discover() {
       <Row>
         {items.length > 0 &&
           items.map(item => {
-            const { id, title, description, image, may_contain } = item
+            const { id, title, description, image, may_contain, desired_trades } = item
             return (
               <Col className='mb-4' key={id} xs={12} sm={6} md={4} lg={3}>
                 <Card className='h-100'>
-                  <Card.Img variant="top" src={image} />
+                  <Card.Img                           
+                    variant="top" 
+                    src={item.image} 
+                    alt= {item.title} 
+                    style={{ maxWidth: '100%', height: 'auto' }}
+                  />
                   <Card.Body className='d-flex flex-column'>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>
                       {description}<br />
-                      {may_contain && `Allergens: ${may_contain}`}
+                      {may_contain && `Allergens: ${may_contain}`}<br />
+                      {desired_trades && `Desired Trades: ${desired_trades}`}
                     </Card.Text>
                     <Button className='modal-button' onClick={() => {
                       handleTradeModal(item)
@@ -72,7 +83,8 @@ export default function Discover() {
       <TradeItem
         item={selectedItem}
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={handleCloseModal}
+        onSuccess={handleCloseModal}
       />
     </Container>
   )

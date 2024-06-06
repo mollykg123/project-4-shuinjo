@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "title": "Sourdough Boule",
-      "image": "sourdough.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667754/shuinjo/sourdough_inicga.jpg",
       "description": "60% rye and 40% white, homemade sourdough boule, open crust.",
       "may_contain": "[\"nuts\", \"milk\"]",
       "desired_trades": "[\"kefir\", \"flour\"]",
@@ -17,7 +17,7 @@
     "pk": 2,
     "fields": {
       "title": "Kefir",
-      "image": "kefir.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667753/shuinjo/kefir_vsgixg.jpg",
       "description": "Fresh homemade kefir made from organic milk.",
       "may_contain": "[\"milk\"]",
       "desired_trades": "[\"sourdough\", \"kimchi\"]",
@@ -30,7 +30,7 @@
     "pk": 3,
     "fields": {
       "title": "Kimchi",
-      "image": "kimchi.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667754/shuinjo/whole-cabbage-kimchi_xon7lb.jpg",
       "description": "Spicy homemade kimchi made with fresh ingredients.",
       "may_contain": "[\"fish sauce\"]",
       "desired_trades": "[\"kefir\", \"bread\"]",
@@ -43,7 +43,7 @@
     "pk": 4,
     "fields": {
       "title": "Compost",
-      "image": "compost.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667751/shuinjo/compost_frbct8.jpg",
       "description": "Rich, homemade compost, perfect for gardening.",
       "may_contain": null,
       "desired_trades": "[\"vegetables\", \"seeds\"]",
@@ -56,7 +56,7 @@
     "pk": 5,
     "fields": {
       "title": "Allotment Vegetables",
-      "image": "vegetables.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667750/shuinjo/allotment-vegetables_ndafqb.jpg",
       "description": "Fresh vegetables from my allotment, organically grown.",
       "may_contain": null,
       "desired_trades": "[\"compost\", \"honey\"]",
@@ -69,7 +69,7 @@
     "pk": 6,
     "fields": {
       "title": "Honey",
-      "image": "honey.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667752/shuinjo/honey_a7eu0m.jpg",
       "description": "Raw, unfiltered honey from my backyard beehives.",
       "may_contain": null,
       "desired_trades": "[\"vegetables\", \"bread\"]",
@@ -82,7 +82,7 @@
     "pk": 7,
     "fields": {
       "title": "Pickled Cucumbers",
-      "image": "pickles.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667754/shuinjo/pickled-cuccumber_qkixdf.jpg",
       "description": "Homemade pickled cucumbers, crunchy and tangy.",
       "may_contain": null,
       "desired_trades": "[\"kimchi\", \"sourdough\"]",
@@ -95,7 +95,7 @@
     "pk": 8,
     "fields": {
       "title": "Homemade Jam",
-      "image": "jam.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667753/shuinjo/strawberry-jam_attpuw.jpg",
       "description": "Sweet homemade jam made from organic berries.",
       "may_contain": null,
       "desired_trades": "[\"bread\", \"honey\"]",
@@ -108,7 +108,7 @@
     "pk": 9,
     "fields": {
       "title": "Herbal Tea",
-      "image": "herbal_tea.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667754/shuinjo/herbal-tea_lc9thm.png",
       "description": "Dried herbal tea mix from my garden herbs.",
       "may_contain": null,
       "desired_trades": "[\"honey\", \"jam\"]",
@@ -120,8 +120,8 @@
     "model": "items.item",
     "pk": 10,
     "fields": {
-      "title": "Homemade Soap",
-      "image": "soap.png",
+      "title": "soap",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667752/shuinjo/soap_blaamd.png",
       "description": "Natural homemade soap with essential oils.",
       "may_contain": null,
       "desired_trades": "[\"herbs\", \"candles\"]",
@@ -134,7 +134,7 @@
     "pk": 11,
     "fields": {
       "title": "Sourdough Starter",
-      "image": "sourdough_starter.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667752/shuinjo/sourdough_starter_22976_16x9_shdlmc.jpg",
       "description": "Active sourdough starter for homemade bread.",
       "may_contain": "[\"gluten\"]",
       "desired_trades": "[\"flour\", \"kefir\"]",
@@ -147,7 +147,7 @@
     "pk": 12,
     "fields": {
       "title": "Dried Herbs",
-      "image": "dried_herbs.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667753/shuinjo/dried-herbs_hqhtoi.jpg",
       "description": "Home-grown dried herbs for cooking.",
       "may_contain": null,
       "desired_trades": "[\"soap\", \"jam\"]",
@@ -160,7 +160,7 @@
     "pk": 13,
     "fields": {
       "title": "Fermented Hot Sauce",
-      "image": "hot_sauce.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667751/shuinjo/fermented-hot-sauce-3_qkpoy6.jpg",
       "description": "Spicy homemade fermented hot sauce.",
       "may_contain": null,
       "desired_trades": "[\"kimchi\", \"pickles\"]",
@@ -173,7 +173,7 @@
     "pk": 14,
     "fields": {
       "title": "Candle",
-      "image": "candle.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667751/shuinjo/candles_fkjklm.png",
       "description": "Hand-poured soy candle with lavender scent.",
       "may_contain": null,
       "desired_trades": "[\"soap\", \"herbal tea\"]",
@@ -186,7 +186,7 @@
     "pk": 15,
     "fields": {
       "title": "Fresh Eggs",
-      "image": "eggs.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667750/shuinjo/fresh-eggs_batfcq.jpg",
       "description": "Fresh eggs from free-range chickens.",
       "may_contain": "[\"eggs\"]",
       "desired_trades": "[\"vegetables\", \"honey\"]",
@@ -199,7 +199,7 @@
     "pk": 16,
     "fields": {
       "title": "Homemade Cheese",
-      "image": "cheese.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667751/shuinjo/homemade-cheese_turpep.jpg",
       "description": "Delicious homemade cheese from fresh milk.",
       "may_contain": "[\"milk\"]",
       "desired_trades": "[\"bread\", \"jam\"]",
@@ -212,7 +212,7 @@
     "pk": 17,
     "fields": {
       "title": "Fermented Vegetables",
-      "image": "fermented_vegetables.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667750/shuinjo/fermeneted-vegetables_zzx0lr.jpg",
       "description": "Mixed fermented vegetables, tangy and healthy.",
       "may_contain": null,
       "desired_trades": "[\"kimchi\", \"sourdough\"]",
@@ -225,7 +225,7 @@
     "pk": 18,
     "fields": {
       "title": "Homemade Granola",
-      "image": "granola.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667751/shuinjo/homemade-granola_ehkhi4.jpg",
       "description": "Crunchy homemade granola with nuts and honey.",
       "may_contain": "[\"nuts\", \"honey\"]",
       "desired_trades": "[\"yogurt\", \"jam\"]",
@@ -238,7 +238,7 @@
     "pk": 19,
     "fields": {
       "title": "Yogurt",
-      "image": "yogurt.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667751/shuinjo/homemade_yoghurt_hero_nzsias.jpg",
       "description": "Thick, creamy homemade yogurt.",
       "may_contain": "[\"milk\"]",
       "desired_trades": "[\"granola\", \"honey\"]",
@@ -251,7 +251,7 @@
     "pk": 20,
     "fields": {
       "title": "Homegrown Tomatoes",
-      "image": "tomatoes.png",
+      "image": "https://res.cloudinary.com/dyn77v6go/image/upload/v1717667752/shuinjo/tomato_c6ymnp.jpg",
       "description": "Sweet, juicy homegrown tomatoes.",
       "may_contain": null,
       "desired_trades": "[\"cheese\", \"vegetables\"]",

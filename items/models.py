@@ -3,8 +3,8 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class Item(models.Model):
-  title = models.CharField(max_length=50)
-  image = models.CharField(max_length=200)
+  title = models.CharField(max_length=200)
+  image = models.CharField(max_length=300)
   description = models.CharField(max_length=200, blank=True, null=True)
   may_contain = ArrayField(models.CharField(max_length=50), blank=True, null=True)
   desired_trades = ArrayField(models.CharField(max_length=50), blank=True, null=True)
