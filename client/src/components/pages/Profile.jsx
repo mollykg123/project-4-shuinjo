@@ -69,6 +69,11 @@ export default function Profile() {
     setSelectedItem(item)
     setShowDeleteModal(true)
   }
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false)
+    getUserProfile()
+  }
   // const handleShowConfirmDelete = (item) => {
   //   setSelectedItem(item)
   //   setShowConfirmDelete(true)
@@ -209,7 +214,7 @@ export default function Profile() {
         </Modal>
 
         {/* Modal for Deleting Item */}
-        <Modal show={showDeleteModal} onHide={handleCloseModal}>
+        <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Delete Item</Modal.Title>
           </Modal.Header>
@@ -218,11 +223,9 @@ export default function Profile() {
               <DeleteItem
                 item={selectedItem}
                 onDelete={() => {
-                  handleCloseModal()
-                  // setLoading(true)
-                  getUserProfile()
+                  handleCloseDeleteModal
                 }}
-                onCancel={handleCloseModal}
+                onCancel={() => setShowDeleteModal(false)}
               />
             )}
           </Modal.Body>

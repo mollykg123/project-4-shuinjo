@@ -10,12 +10,14 @@ import { getUserProfile } from '../functions/getUserProfile.js'
 export default function TradeItem({ item, onHide, show }) {
 // console.log(item)
 const [userItemsCreated, setUserItemsCreated] = useState([])
+const [itemRequestedValue, setItemRequestedValue] = useState('')
 
 
 useEffect(() => {
   getUserProfile()
     .then(data => {
       setUserItemsCreated(data.items_created)
+      setItemRequestedValue(item.title)
     })
     .catch(error => {
       console.log(error)
@@ -26,6 +28,7 @@ useEffect(() => {
     return null
   }
 
+
   const { location, username } = item.owner
   console.log(location, username)
   console.log('item selected:', item.title)
@@ -33,7 +36,8 @@ useEffect(() => {
   const fields = {
     item_requested: {
       type: 'text',
-      value: item.title,
+      value: itemRequestedValue,
+      // placeholder: item.title
       disabled: true
     },
     item_offered: {
@@ -41,11 +45,14 @@ useEffect(() => {
       options: userItemsCreated.map(userItem => userItem.title)
     }
   }
-
   
-  async function handleTradeRequest(){
+  
+  
+  async function handleTradeRequest(formData){
     try {
-      await axios.post('/api/requests/', {
+      console.log('item requested:', formData.item_requested.value),
+      console.log(formData)
+      await axios.post(`/api/requests/`, formData, {
         headers: {
           Authorization: `Bearer ${getAccess()}`
         }

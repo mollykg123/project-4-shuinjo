@@ -16,7 +16,7 @@ class RequestIndexView(ObjectOwnerView, generics.ListCreateAPIView):
     sender = self.request.user
     item_requested = serializer.validated_data.get('item_requested')
     receiver = item_requested.owner
-    serializer.save(sender=sender, receiver=receiver)
+    serializer.save(sender=sender, receiver=receiver, item_requested=item_requested)
 
 # Detail view for retrieving, updating and deleting a specific request
 class RequestDetailView(generics.RetrieveUpdateDestroyAPIView):

@@ -10,7 +10,7 @@ export default function CreateItem({ getUserProfile, onCreated }) {
       placeholder: 'name of item here'
     },
     image: {
-      type: 'file',
+      type: 'text',
       placeholder: 'upload an image'
     },
     description: {
