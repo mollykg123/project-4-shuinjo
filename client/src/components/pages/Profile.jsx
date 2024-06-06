@@ -16,7 +16,7 @@ import {
 import CreateItem from '../subcomponents/CreateItem.jsx'
 import UpdateItem from '../subcomponents/UpdateItem.jsx'
 import DeleteItem from '../subcomponents/DeleteItem.jsx'
-// import UpdateStatusRequest from '../subcomponents/UpdateStatusRequest.jsx'
+import { useUpdateStatusRequest } from '../subcomponents/UpdateStatusRequest.jsx'
 
 
 export default function Profile() {
@@ -26,20 +26,8 @@ export default function Profile() {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
-  // const [showModal, setShowModal] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
-  // const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
-
-  // useEffect(() => {
-  //   getUserProfile()
-  //     .then(data => {
-  //       setUserProfile(data)
-  //     })
-  //     .catch(error => {
-  //       setProfileError(error.message)
-  //     })
-  // }, [])
 
   const fetchUserProfile = async () => {
     try {
@@ -74,14 +62,8 @@ export default function Profile() {
     setShowUpdateModal(false)
     await fetchUserProfile()
   }
-  // const handleItemUpdated = async () => {
-  //   handleCloseUpdateModal()
-  //   // setLoading(true)
-  //   getUserProfile()
-  // }
 
   // Delete Modal Handlers
-
   const handleShowDeleteModal = (item) => {
     setSelectedItem(item)
     setShowDeleteModal(true)
@@ -92,15 +74,12 @@ export default function Profile() {
     await fetchUserProfile()
   }
 
+  const { loading: updateLoading, error: updateError, updateStatus } = useUpdateStatusRequest();
 
-  // const handleShowConfirmDelete = (item) => {
-  //   setSelectedItem(item)
-  //   setShowConfirmDelete(true)
-  // }
-
-  // const handleCancelDelete = () => {
-  //   setShowConfirmDelete(false)
-  // }
+  // Status Update
+  const handleStatusUpdate = async () => {
+    await fetchUserProfile()
+  }
 
   if (loading) {
     return (
@@ -128,8 +107,8 @@ export default function Profile() {
               <Card.Body>
                 <Card.Title>Details</Card.Title>
                 <Card.Text>
-                  <p className='card-details '><strong>{userProfile.username}</strong></p>
-                  <p className='card-details'>{userProfile.location}</p>
+                  <Card.Text className='card-details '><strong>{userProfile.username}</strong></Card.Text>
+                  <Card.Text className='card-details'>{userProfile.location}</Card.Text>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -197,7 +176,26 @@ export default function Profile() {
                   <ListGroup variant="flush">
                     {userProfile.received_requests.map(req => (
                       <ListGroup.Item key={req.id}>
-                        {req.item_offered.title} for {req.item_requested.title} - Status: {req.status}
+                        <div>{req.item_offered.title} for {req.item_requested.title} - Status: {req.status}</div>
+                        <Button 
+                          variant="success" 
+                          size="sm" 
+                          className="mt-2 me-2" 
+                          onClick={() => updateStatus(req.id, 'accepted', handleStatusUpdate)}
+                          disabled={updateLoading}
+                        >
+                          Accept
+                        </Button>
+                        <Button 
+                          variant="danger" 
+                          size="sm" 
+                          className="mt-2" 
+                          onClick={() => updateStatus(req.id, 'rejected', handleStatusUpdate)}
+                          disabled={updateLoading}
+                        >
+                          Reject
+                        </Button>
+                        {updateError && <Alert variant="danger">{updateError}</Alert>}
                       </ListGroup.Item>
                     ))}
                   </ListGroup>

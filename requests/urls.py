@@ -1,10 +1,10 @@
 from django.urls import path
 from .views import RequestDetailView, RequestIndexView
 
-# Index endpoint: /api/items
-# Show endpoint: /api/items/:itemId
+# Index endpoint: /api/requests
+# Show endpoint: /api/requests/:requestId
 
 urlpatterns = [
-  path('', RequestIndexView.as_view()), # /api/items/
-  path('<int:pk>/', RequestDetailView.as_view()) # /api/items/:pk
+  path('', RequestIndexView.as_view()), # /api/requests/
+  path('<int:pk>/', RequestDetailView.as_view()) # /api/requests/:pk
 ]
